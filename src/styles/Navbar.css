@@ -1,9 +1,11 @@
 /* Navbar Container */
 .navbar {
-    background-color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  background-color: gainsboro;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  /* text-decoration: dashed; */
+}
   
   .navbar-container {
     display: flex;

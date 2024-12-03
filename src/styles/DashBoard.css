@@ -1,0 +1,237 @@
+/* General Styles */
+html, body {
+  height: 100%; /* Make sure the body takes full height */
+  margin: 0; /* Remove default margin */
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh; /* Full height of the viewport */
+  /*background-image: url('../assets/Cardashboard.jpg'); /* Add your image URL here */
+  background-size: cover; /* Make sure the image covers the entire screen */
+  background-position: center center; /* Center the image */
+  background-size: cover;
+  background-attachment: fixed; /* Keep the background fixed while scrolling */
+  /*color: white;  Set text color to white for contrast */
+  flex-direction: column;
+  overflow: hidden; /* Prevent overflow */
+}
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sidebar-container {
+  position: relative;  /* Needed for proper positioning of the sidebar */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 200px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  z-index: 1; /* Ensure the sidebar is behind the hamburger button */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Show the sidebar */
+  z-index: 2; /* Bring sidebar above content when open */
+}
+.cardashboard{
+  width: 100%;
+    height: 100%;
+    
+}
+/* Hamburger Button Styles */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 35px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative; /* Keep the hamburger button fixed on the screen */
+  left: 20px;
+  z-index: 1000; /* Keep the hamburger button on top of everything */
+}
+
+.hamburger .bar {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover .bar {
+  background-color: #3498db; /* Blue color when hovered */
+}
+
+/* Sidebar Content */
+.sidebar h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 60px; /* Add spacing below the hamburger button */
+}
+
+.sidebar ul li {
+  padding: 15px 0;
+  margin-top: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.1em;
+}
+
+.sidebar ul li:hover {
+  background-color: #34495e; /* Darker color when hovered */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 250px; /* Keep space for sidebar */
+  }
+
+  .sidebar {
+    width: 100%; /* Full-width sidebar on mobile */
+  }
+
+  .hamburger {
+    top: 10px;
+    left: 10px; /* Move hamburger slightly on small screens */
+  }
+
+  .sidebar ul li {
+    padding: 10px; /* Adjust padding for mobile */
+    font-size: 1em; /* Adjust font size for mobile */
+  }
+}
+
+
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+  }
+  
+  /* Cars Section Styles */
+.cars {
+  padding: 20px;
+}
+
+/* Button Styling */
+.cars .view-all-cars {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.cars .view-all-cars:hover {
+  background-color: #2980b9;
+}
+
+/* Car Grid Layout */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.car-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.car-card img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.car-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.car-card p {
+  color: #7f8c8d;
+}
+
+
+
+  header {
+    margin-bottom: 30px;
+  }
+  
+  header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  header p {
+    font-size: 1.2em;
+  }
+  
+  section {
+    margin-bottom: 40px;
+  }
+  
+  section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  table, ul {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th, table td, ul li {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #2980b9;
+    color: white;
+  }
+  
+  table tr:hover {
+    background-color: #f0f8ff;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+  }
+
+  
