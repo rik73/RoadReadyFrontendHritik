@@ -1,113 +1,72 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom"; // To handle navigation
-import "../styles/Login.css"; // Ensure you create appropriate styles
-import carImage from "../assets/logincar.png"; // Your car image
+import carImage from "../assets/carImage.jpg"; // Update with your car image path
 
-function Login() {
-  const [username, setUsername] = useState(""); // Username input
-  const [password, setPassword] = useState(""); // Password input
-  const [errorMessage, setErrorMessage] = useState(""); // Error message state
-  const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility toggle
-
-  const navigate = useNavigate(); // Initialize navigate hook for navigation
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    const loginData = {
-      UserName: username,
-      Password: password,
-    };
-
-    try {
-      const response = await axios.post("https://localhost:7087/api/Authentication/login", loginData);
-      localStorage.setItem("token", response.data.token); // Store JWT token
-      window.location.href = "/dashboard"; // Redirect to dashboard after successful login
-    } catch (error) {
-      setErrorMessage("Invalid credentials, please try again.");
-    }
-  };
-
-  // Toggle the password visibility
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  // Redirect to the registration page
-  const redirectToRegister = () => {
-    navigate("/register"); // Navigates to the register page
-  };
+const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        {/* Login Form */}
-        <div className="login-form-container">
-          <h2 className="login-title">Login to Your Account</h2>
-          <p className="login-subtitle">Welcome back to RoadReady!</p>
-          <form className="login-form" onSubmit={handleLogin}>
-            <div className="input-group">
-              <label htmlFor="username">Username</label>
+    <div className="flex justify-center items-center min-h-screen bg-blue-50 font-sans">
+      <div className="flex flex-col md:flex-row w-[90%] max-w-4xl bg-white p-8 md:p-12 rounded-lg shadow-xl">
+        {/* Login Form Section */}
+        <div className="md:w-1/2">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Welcome Back!</h1>
+          <p className="text-lg text-gray-600 mb-8">
+            Log in to access your RoadReady account and manage your reservations.
+          </p>
+          <form>
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700">Email</label>
               <input
-                type="text"
-                id="username"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 mt-2 border border-gray-300 rounded-lg text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
-
-            <div className="input-group password-group">
-              <label htmlFor="password">Password</label>
-              <div className="password-input-container">
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <div className="relative">
                 <input
-                  type={passwordVisible ? "text" : "password"} // Toggle between password and text
-                  id="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                  className="w-full px-4 py-3 pr-12 mt-2 border border-gray-300 rounded-lg text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 />
                 <button
                   type="button"
-                  className="password-toggle-btn"
-                  onClick={togglePasswordVisibility}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-1/2 right-3 -translate-y-1/2 text-blue-500 hover:text-blue-700"
                 >
-                  {/* Eye Icon */}
-                  {passwordVisible ? (
-                    <i className="fas fa-eye-slash"></i>
-                  ) : (
-                    <i className="fas fa-eye"></i>
-                  )}
+                  {showPassword ? "🙈" : "👁️"}
                 </button>
               </div>
             </div>
-
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-            <button type="submit" className="login-btn">Login</button>
+            <button
+              type="submit"
+              className="w-full py-3 bg-blue-500 text-white font-semibold text-lg rounded-full hover:bg-blue-600 transition-transform transform hover:-translate-y-1"
+            >
+              Log In
+            </button>
           </form>
-
-          {/* Don't have an account? Link */}
-          <div className="no-account">
-            <p>
+          <div className="text-center mt-6">
+            <p className="text-sm">
               Don't have an account?{" "}
-              <span className="register-link" onClick={redirectToRegister}>
+              <a href="/register" className="text-blue-500 font-semibold hover:underline">
                 Sign Up
-              </span>
+              </a>
             </p>
           </div>
         </div>
 
-        {/* Car Image */}
-        <div className="car-image-container">
-          <img src={carImage} alt="Car" className="car-image" />
+        {/* Car Image Section */}
+        <div className="hidden md:flex md:w-1/2 justify-center items-center">
+          <img
+            src={carImage}
+            alt="Car"
+            className="w-4/5 max-h-72 object-cover rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:-translate-y-1"
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Login;

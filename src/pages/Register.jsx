@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // To handle navigation
-import "../styles/Register.css"; // Ensure you create appropriate styles
-import carImage from "../assets/logincar.png"; // Your car image
+import { useNavigate } from "react-router-dom";
+import carImage from "../assets/logincar.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,14 +9,13 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNumber: "", // Added phone number
+    phoneNumber: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,45 +24,30 @@ const Register = () => {
     }));
   };
 
-  // Handle form submission
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Password matching validation
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return;
     }
 
-    // Log the form data for debugging
-    console.log("Form Data Sent to Backend: ", {
-      UserName: formData.username,
-      Email: formData.email,
-      Password: formData.password,
-      PhoneNumber: formData.phoneNumber, // Send phone number
-      Role: "User", // Hardcoded role
-    });
-
     try {
-      // Make the API call to register the user
-      const response = await axios.post("https://localhost:7087/api/Authentication/register", {
-        UserName: formData.username,
-        Email: formData.email,
-        Password: formData.password,
-        PhoneNumber: formData.phoneNumber, // Send phone number
-        Role: "User", // Hardcoded role
-      });
+      const response = await axios.post(
+        "https://localhost:7087/api/Authentication/register",
+        {
+          UserName: formData.username,
+          Email: formData.email,
+          Password: formData.password,
+          PhoneNumber: formData.phoneNumber,
+          Role: "User",
+        }
+      );
 
-      console.log("Registration Successful: ", response.data);
-
-      // Set success message
       setSuccessMessage("Registration successful! Redirecting to login...");
       setErrorMessage("");
-
-      // Navigate to login page after a delay
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      console.error("Registration Error: ", error.response?.data || error.message);
       setErrorMessage(
         error.response?.data?.message || "Failed to register. Please try again."
       );
@@ -72,15 +55,21 @@ const Register = () => {
   };
 
   return (
-    <div className="register-page">
-      <div className="register-container">
-        {/* Registration Form */}
-        <div className="register-form-container">
-          <h2 className="register-title">Create Your Account</h2>
-          <p className="register-subtitle">Join RoadReady and start your journey today!</p>
-          <form className="register-form" onSubmit={handleRegister}>
-            <div className="input-group">
-              <label htmlFor="username">Username</label>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="flex flex-col lg:flex-row items-center bg-white shadow-lg rounded-lg max-w-4xl w-full p-8 lg:p-12">
+        {/* Form Section */}
+        <div className="w-full lg:w-1/2">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Create Your Account
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Join RoadReady and start your journey today!
+          </p>
+          <form onSubmit={handleRegister}>
+            <div className="mb-4">
+              <label htmlFor="username" className="block text-gray-700">
+                Username
+              </label>
               <input
                 type="text"
                 id="username"
@@ -88,11 +77,14 @@ const Register = () => {
                 placeholder="Enter your username"
                 value={formData.username}
                 onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="email">Email</label>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 id="email"
@@ -100,11 +92,14 @@ const Register = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="password">Password</label>
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-gray-700">
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -112,11 +107,14 @@ const Register = () => {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="mb-4">
+              <label htmlFor="confirmPassword" className="block text-gray-700">
+                Confirm Password
+              </label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -124,11 +122,14 @@ const Register = () => {
                 placeholder="Confirm your password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
                 required
               />
             </div>
-            <div className="input-group">
-              <label htmlFor="phoneNumber">Phone Number</label>
+            <div className="mb-4">
+              <label htmlFor="phoneNumber" className="block text-gray-700">
+                Phone Number
+              </label>
               <input
                 type="text"
                 id="phoneNumber"
@@ -136,20 +137,32 @@ const Register = () => {
                 placeholder="Enter your phone number"
                 value={formData.phoneNumber}
                 onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
                 required
               />
             </div>
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            {successMessage && (
-              <div className="success-message">{successMessage}</div>
+            {errorMessage && (
+              <div className="text-red-500 text-sm mb-4">{errorMessage}</div>
             )}
-            <button type="submit" className="register-btn">Register</button>
+            {successMessage && (
+              <div className="text-green-500 text-sm mb-4">{successMessage}</div>
+            )}
+            <button
+              type="submit"
+              className="w-full p-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+              Register
+            </button>
           </form>
         </div>
 
-        {/* Car Image */}
-        <div className="car-image-container">
-          <img src={carImage} alt="Car" className="car-image" />
+        {/* Image Section */}
+        <div className="hidden lg:block lg:w-1/2">
+          <img
+            src={carImage}
+            alt="Car"
+            className="rounded-lg object-cover w-full h-full"
+          />
         </div>
       </div>
     </div>

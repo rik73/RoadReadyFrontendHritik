@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('E:\Dot Net FSD Training Phase3\RoadReady Case Study\FrontEndRoadReady\frontenddev\src\assets\Cardashboard.jpg'); /* Path to your background image */
+    background-image: url('F:\RoadReadyFinal\RoadReadyFrontendY\src\assets\Cardashboard.jpg'); /* Path to your background image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
